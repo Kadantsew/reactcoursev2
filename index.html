@@ -8,12 +8,42 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>    
+
+    <style>
+        .red {
+            color: #f00;
+        }
+    </style>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
-        
+        const App = () => {
+            return <p>Hello, I'm component App!</p>;
+        };
+
+        const News = () => {
+            return <p> There are no news</p>;
+        };
+
+        class BigApp extends React.Component {
+            render() {
+                return (
+                    <React.Fragment>
+                        <h1>I'mcomponent BigApp</h1>
+                        <p className="red">Components can be inserted into another component</p>
+                        <App/>
+                        <News/>
+                    </React.Fragment>
+                )
+            };
+        };
+
+        ReactDOM.render(
+            <BigApp/>,
+            document.getElementById('root')
+        )
     </script>
 </body>
 </html>
