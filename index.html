@@ -51,32 +51,54 @@
             {
                 id: 1,
                 author: 'John Snow',
-                text: 'Winter is comming'
+                text: 'Winter is comming',
+                bigText: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s'
             },
             {
                 id: 2,
                 author: 'Jim Kerry',
-                text: 'Ablabulabla'
+                text: 'Ablabulabla',
+                bigText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
             },
             {
                 id: 3,
                 author: 'Donald Trump',
-                text: 'Make America great again'
+                text: 'Make America great again',
+                bigText: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam'
             },
             {
                 id: 4,
                 author: 'Olexander Kadantsev',
-                text: 'Hello darkness my old friend'
+                text: 'Hello darkness my old friend',
+                bigText: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,'
             }
         ];
 
         class Article extends React.Component {
+            state = {
+                visible: false,
+            }
+
+            handleReadMoreClick = (e) => {
+                e.preventDefault();
+                this.setState({visible: true});
+            }
+
             render() {
-                const {author,text} = this.props.data;
+                const {author,text,bigText} = this.props.data;
+                const {visible} = this.state;
                 return (
                     <div className="article">
                         <p className="article__author">{author}:</p>
                         <p className="article__text">{text}</p>
+                        {
+                            !visible &&
+                            <a href="#" onClick={this.handleReadMoreClick} className="article_readmore">Read more</a>
+                        }
+                        {
+                            visible &&
+                            <p className="article__big-text">{bigText}</p>
+                        }
                     </div>
                 );
             }
@@ -120,7 +142,8 @@
         Article.propTypes = {
             data: PropTypes.shape({
                 author: PropTypes.string.isRequired,
-                text: PropTypes.string.isRequired           
+                text: PropTypes.string.isRequired,      
+                bigText: PropTypes.string.isRequired
             })
         }
 
