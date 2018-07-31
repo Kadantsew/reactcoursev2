@@ -122,14 +122,24 @@
                 return newsTemplate;
             }
 
+            state = {
+                count: 0,
+            }
+
+            handleCountClick = (e) => {
+                this.setState({count: ++this.state.count})
+            }
+
             render() {                
                 const {data} = this.props;
+                const {count} = this.state;
                 return (
                     <div className="news">
                         {this.renderNews()}
                         {
-                            data.length ? <strong className="news__count">Count of news: {data.length}</strong> : null
+                            data.length ? <strong onClick={this.handleCountClick} className="news__count">Count of news: {data.length}</strong> : null
                         }
+                        <p className="news__click-count">Total clicks: {count}</p>
                     </div>
                 );
             }
